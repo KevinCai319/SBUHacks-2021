@@ -150,6 +150,7 @@
     <ClCompile Include="Door.cpp" />
     <ClCompile Include="Floor.cpp" />
     <ClCompile Include="Game.cpp" />
+    <ClCompile Include="GameOver.cpp" />
     <ClCompile Include="Line.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="Teleporter.cpp" />
@@ -167,6 +168,7 @@
     <ClCompile Include="Handler.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="GameOver.hpp" />
     <ClInclude Include="Timed.hpp" />
     <ClInclude Include="TimedLayer.hpp" />
     <ClInclude Include="Button.hpp" />

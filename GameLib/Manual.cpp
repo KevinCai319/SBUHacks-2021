@@ -3,7 +3,7 @@
 
 Manual::Manual() : 
 	headerBox((WIN_WIDTH - TITLE_WIDTH) / 2, MAN_YOFFSET, TITLE_WIDTH, TITLE_HEIGHT), 
-	manualBox(MAN_XOFFSET, WIN_HEIGHT - MAN_TEXT_HEIGHT, MAN_TEXT_WIDTH, MAN_TEXT_HEIGHT), 
+	manualBox((WIN_WIDTH - TITLE_WIDTH) / 2+100, WIN_HEIGHT - MAN_TEXT_HEIGHT, MAN_TEXT_WIDTH, MAN_TEXT_HEIGHT),
 	backButton(0, WIN_HEIGHT - BACK_HEIGHT, BACK_WIDTH, BACK_HEIGHT)
 {
 	tags.insert("Manual"); 
@@ -21,7 +21,7 @@ Manual::Manual() :
 	headerBox.setText(headerText); 
 
 	manualText.setFont(*fontptr); 
-	manualText.setString("Your manual goes right here..."); 
+	manualText.setString("How to Play:\n A : Go left \n D : Go right \n W : Interact"); 
 	manualText.setFillColor(sf::Color::White); 
 	manualText.setCharacterSize(MAN_SIZE); 
 	manualBox.setText(manualText); 

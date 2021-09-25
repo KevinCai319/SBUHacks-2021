@@ -22,6 +22,7 @@
     <ClCompile Include="Timed.cpp" />
     <ClCompile Include="TimedLayer.cpp" />
     <ClCompile Include="Line.cpp" />
+    <ClCompile Include="GameOver.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Button.hpp" />
@@ -43,5 +44,6 @@
     <ClInclude Include="Line.hpp" />
     <ClInclude Include="Timed.hpp" />
     <ClInclude Include="TimedLayer.hpp" />
+    <ClInclude Include="GameOver.hpp" />
   </ItemGroup>
 </Project>
