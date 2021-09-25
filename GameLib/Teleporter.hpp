@@ -1,7 +1,6 @@
 #pragma once
 #include "Physical.hpp"
-class Teleporter :
-    public Physical
+class Teleporter :public Physical
 {
 };
 

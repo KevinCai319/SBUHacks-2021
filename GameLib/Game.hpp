@@ -1,8 +1,10 @@
 #pragma once
-#include "TimedLayer.hpp"
+
 #include "Floor.hpp"
 #include "Door.hpp"
 #include "Teleporter.hpp"
+#include "Player.hpp"
+#include "TimedLayer.hpp"
 class Game:public TimedLayer{
 	public:
 		Game(int difficulty);
@@ -10,10 +12,16 @@ class Game:public TimedLayer{
 	protected:
 		//Number of Doors
 		int numDoors;
+		//Number of Floors
+		int numFloors;
 		//Doors opened.
 		int doorsOpened = 0;
 		//Floor height(in pixels)
 		int fheight = 125;
+		//Default player speed.(250px/s)
+		const int defaultPSpeed = 250;
+		//Default player speed.(125px/s)
+		const int defaultESpeed = 125;
 		//Labels for the player before they die.
 		sf::Text timeLabel;
 		sf::Clock gameTimer;
