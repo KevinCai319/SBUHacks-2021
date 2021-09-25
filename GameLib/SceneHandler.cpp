@@ -1,5 +1,12 @@
+#include <iostream>
+
 #include "SceneHandler.hpp"
-SceneHandler::SceneHandler(int x, int y, const std::string& title,Layer* menu):WindowHandler(x,y,title,menu)
+#include "MainMenu.hpp"
+#include "DifficultySelect.hpp"
+#include "Manual.hpp"
+
+SceneHandler::SceneHandler(int x, int y, const std::string& title,Layer* layer) :
+	WindowHandler(x,y,title,layer)
 {
 	tags.insert("Root");
 }
@@ -9,20 +16,20 @@ int SceneHandler::recieve(Layer& layer, int status)
 	switch (status) {
 		case 0:
 			return status;//Exit
-		case 1:
-			std::cout << "go to difficulty select screen" << std::endl;
+		case MENU: 
+			switchScene(new MainMenu()); 
+			return 0; 
+		case DIFFICULTY:
+			switchScene(new DifficultySelect()); 
 			return 0;
-		case 2:
-			std::cout << "go to instructions screen" << std::endl;
+		case MANUAL:
+			switchScene(new Manual()); 
 			return 0;
-		case 3:
-			std::cout << "go to main game" << std::endl;
+		case GAME:
 			return 0;
-		case 4:
-			std::cout << "go to game over" << std::endl;
+		case DEFEAT:
 			return 0;
-		case 5:
-			std::cout << "go to you won" << std::endl;
+		case WIN:
 			return 0;
 		default:
 			return status;

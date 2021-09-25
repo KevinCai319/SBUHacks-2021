@@ -127,8 +127,6 @@ void Layer::destroyEntities()
 					std::cout << "Something really bad happened...\n";
 				}
 			}
-			//garbageEntity->tags.clear();
-			delete garbageEntity;
 			removeEntityQueue.pop();
 		}
 		toUpdate.erase(garbageEntity);

@@ -16,6 +16,7 @@ class Button:public Physical
 		Button(); 
 		~Button(); 
 
+		void setDefaultFunction(std::function<void()> function);
 		void setClickFunction(std::function<void()> function);
 		void setHoverFunction(std::function<void()> function);
 		void setShape(const sf::RectangleShape& hitbox); 
@@ -27,6 +28,9 @@ class Button:public Physical
 		void alignTextLeft(); 
 		void alignTextCenter(); 
 		void alignTextRight(); 
+		void alignTextTop(); 
+		void alignTextMiddle(); 
+		void alignTextBottom(); 
 
 		virtual int main() override;
 		virtual void render(sf::RenderTarget& target, sf::RenderStates states)const override;
@@ -40,6 +44,7 @@ class Button:public Physical
 		sf::Text* m_text = nullptr; 
 		bool isHovering = false;
 		bool isMouseDown = false;
+		std::function<void()> onDefault = nullptr; 
 		std::function<void()> onClick = nullptr;
 		std::function<void()> onHover = nullptr;
 };

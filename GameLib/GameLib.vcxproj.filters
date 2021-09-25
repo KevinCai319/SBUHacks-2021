@@ -89,6 +89,14 @@
     </ClInclude>
     <ClInclude Include="Clue.hpp">
       <Filter>Header Files\Hotel of Death\GameObjects</Filter>
+    <ClInclude Include="DifficultySelect.hpp">
+      <Filter>Header Files\Hotel of Death</Filter>
+    </ClInclude>
+    <ClInclude Include="Dimension.h">
+      <Filter>Header Files\Hotel of Death</Filter>
+    </ClInclude>
+    <ClInclude Include="Manual.hpp">
+      <Filter>Header Files\Hotel of Death</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -145,6 +153,11 @@
     </ClCompile>
     <ClCompile Include="Clue.cpp">
       <Filter>Source Files\Hotel of Death\GameObjects</Filter>
+    <ClCompile Include="DifficultySelect.cpp">
+      <Filter>Source Files\Hotel of Death</Filter>
+    </ClCompile>
+    <ClCompile Include="Manual.cpp">
+      <Filter>Source Files\Hotel of Death</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

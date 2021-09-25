@@ -9,8 +9,9 @@ class WindowHandler:public Handler
 		int main() override;
 		// handle request
 		virtual int recieve(Layer& layer,int status)override;
+		void setBGColor(sf::Color& bg); 
 	private:
 		sf::RenderWindow window;
-		
+		sf::Color bgColor; 
 };
 

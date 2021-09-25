@@ -1,6 +1,15 @@
 #pragma once
 #include "WindowHandler.hpp"
 #include "MainMenu.hpp"
+
+#define EXIT -1
+#define MENU 1
+#define DIFFICULTY 2
+#define MANUAL 3
+#define GAME 4
+#define DEFEAT 5
+#define WIN 6
+
 class SceneHandler : public WindowHandler
 {
 	public:
