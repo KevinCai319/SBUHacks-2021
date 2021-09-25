@@ -8,7 +8,7 @@
 #define MAN_TEXT_HEIGHT (WIN_HEIGHT * 0.8)
 #define MAN_XOFFSET ((WIN_WIDTH - MAN_TEXT_WIDTH) / 2) 
 #define MAN_YOFFSET ((WIN_HEIGHT - MAN_TEXT_HEIGHT - TITLE_HEIGHT) / 2)
-#define MAN_SIZE 72
+#define MAN_SIZE 144
 
 class Manual : public Layer
 {

@@ -16,7 +16,7 @@ Game::Game(int difficulty) :
 			numFloors = 4;
 			break;
 		case 2:
-			timeLimit = 60;
+			timeLimit = 5;
 			numDoors = 48;
 			numFloors = 6;
 			break;
@@ -44,7 +44,7 @@ int Game::main()
 {
 	int res = TimedLayer::main();
 	//Game Over
-	if (gameTimer.getElapsedTime().asSeconds() > timeLimit)return 9;
+	if (gameTimer.getElapsedTime().asSeconds() > timeLimit)return 7;
 	return res;
 }
 
@@ -121,7 +121,7 @@ int Game::recieve(Layer& layer, int status)
 		case 1://Player wins
 			return 10;
 		case 4://Players fails
-			return 9;
+			return 7;
 		case 3://Grab timer data.
 
 			break;

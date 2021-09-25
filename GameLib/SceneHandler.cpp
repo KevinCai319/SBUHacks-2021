@@ -5,6 +5,7 @@
 #include "DifficultySelect.hpp"
 #include "Manual.hpp"
 #include "Game.hpp"
+#include "GameOver.hpp"
 
 SceneHandler::SceneHandler(int x, int y, const std::string& title,Layer* layer) :
 	WindowHandler(x,y,title,layer)
@@ -36,8 +37,10 @@ int SceneHandler::recieve(Layer& layer, int status)
 			switchScene(new Game(2));
 			return 0;
 		case DEFEAT:
+			switchScene(new GameOver(false));
 			return 0;
 		case WIN:
+			switchScene(new GameOver(true));
 			return 0;
 		default:
 			return status;
