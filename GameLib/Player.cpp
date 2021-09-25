@@ -1,5 +1,6 @@
 #include "Player.hpp"
 #include "Teleporter.hpp"
+#include "Door.hpp"
 Player::Player(int sx, int sy, int width, int height, float velocity, int lbound, int rbound, int floor, sf::Keyboard::Key left, sf::Keyboard::Key right, sf::Keyboard::Key interact) :
 	left(left),
 	right(right),
@@ -37,10 +38,19 @@ int Player::main(float dt)
 			Teleporter* tp = dynamic_cast<Teleporter*>(i);
 			if (getFloor() == tp->floor && getR() > tp->sx && getL() < tp->sx + tp->width) {
 				if (tdCounter <= 0.0f) {
-					box.setPosition(tp->linked->sx,tp->linked->sy-height);
+					box.setPosition(tp->linked->sx, tp->linked->sy - height);
 					tdCounter = tDebounce;
 					floor = tp->linked->floor;
 				}
+			}
+		}
+		std::set<Layer*> doors = parent->getTag("Door");
+		for (Layer* i : doors)
+		{
+			Door* dr = dynamic_cast<Door*>(i); 
+			if (getFloor() == dr->getFloor() && getR() > dr->getStart().x && getL() < dr->getStart().x + dr->getSize().x)
+			{
+				// TODO: show clue 
 			}
 		}
 	}

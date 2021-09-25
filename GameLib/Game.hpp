@@ -1,5 +1,5 @@
 #pragma once
-
+#include <vector>
 #include "Floor.hpp"
 #include "Door.hpp"
 #include "Teleporter.hpp"
@@ -34,8 +34,8 @@ class Game:public TimedLayer{
 		//Find subset of all bit arrays to use.
 		void findBitArrays();
 		//Create door based on bit arrays.
-		void createDoors();
 		void createTeleporters();
+		void createDoors(); 
 		virtual int recieve(Layer& layer, int status) override;
 		virtual void notify(Layer& layer, int status) override;
 };

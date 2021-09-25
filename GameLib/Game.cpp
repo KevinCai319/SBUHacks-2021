@@ -23,8 +23,7 @@ Game::Game(int difficulty) :
 		default:
 			timeLimit = 120;
 			numDoors = 32;
-			numFloors = 4;
-			break;
+			numFloors = 4; break;
 	}
 	createFloors(numFloors);
 	int p_bez = 12;
@@ -38,6 +37,7 @@ Game::Game(int difficulty) :
 	addEntity(player);
 	createEntities();
 	createTeleporters();
+	createDoors(); 
 }
 
 int Game::main()
@@ -59,10 +59,6 @@ void Game::createFloors(int h)
 }
 
 void Game::findBitArrays()
-{
-}
-
-void Game::createDoors()
 {
 }
 
@@ -109,6 +105,22 @@ void Game::createTeleporters()
 		s -= 2;
 	}
 	
+}
+
+void Game::createDoors()
+{
+	float dwidth = (Floor::width * 0.6) / (numDoors / numFloors); 
+	float dheight = Floor::height * 0.9; 
+	float space = (numDoors * dwidth) / (numDoors + 1); 
+	for (int f = 0; f < numFloors; ++f)
+	{
+		float sy = 1080-f*fheight-Floor::height - dheight;  
+		for (int d = 0; d < numDoors / numFloors; ++d)
+		{
+			float sx = Floor::bezel / 2 + d * dwidth + (d + 1) * space; 
+			addEntity(new Door(sx, sy, dwidth, dheight, f)); 
+		}
+	}
 }
 
 int Game::recieve(Layer& layer, int status)
