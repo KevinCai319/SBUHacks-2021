@@ -1,55 +1,55 @@
-#include <iostream>
 #include "MainMenu.hpp"
+#include "SceneHandler.hpp"
 #include "Button.hpp"
+
 MainMenu::MainMenu() : 
-	titleBox((WWIDTH - TWIDTH) / 2, (WHEIGHT - THEIGHT) / 3, TWIDTH, THEIGHT),
-	playButton(XOFFSET, YOFFSET, BWIDTH, BHEIGHT), 
-	instructionButton(XOFFSET + BWIDTH + SPACE, YOFFSET, BWIDTH, BHEIGHT), 
-	exitButton(XOFFSET + 2*BWIDTH + 2*SPACE, YOFFSET, BWIDTH, BHEIGHT)
+	titleBox((WIN_WIDTH - TITLE_WIDTH) / 2, (WIN_HEIGHT - TITLE_HEIGHT) / 3, TITLE_WIDTH, TITLE_HEIGHT),
+	playButton(MENU_XOFFSET, MENU_YOFFSET, BUTTON_WIDTH, BUTTON_HEIGHT), 
+	manualButton(MENU_XOFFSET + BUTTON_WIDTH + MENU_HSPACE, MENU_YOFFSET, BUTTON_WIDTH, BUTTON_HEIGHT), 
+	exitButton(MENU_XOFFSET + 2*BUTTON_WIDTH + 2*MENU_HSPACE, MENU_YOFFSET, BUTTON_WIDTH, BUTTON_HEIGHT)
 {
 	tags.insert("Menu");
 	
 	fontptr = new sf::Font(); 
 	if (!fontptr->loadFromFile("Assets\\youmurdererbb_reg.ttf"))
 	{
-		std::cout << "Cannot load" << std::endl; 
-		// do something
+		// something happened
 	}
 
 	titleText.setFont(*fontptr); 
 	titleText.setString("Hotel of Death"); 
 	titleText.setFillColor(sf::Color::Red); 
-	titleText.setCharacterSize(168); 
+	titleText.setCharacterSize(TITLE_SIZE); 
 	titleBox.setText(titleText); 
 
 	playText.setFont(*fontptr); 
 	playText.setString("Play"); 
-	playText.setFillColor(sf::Color::Black); 
-	playText.setCharacterSize(96); 
+	playText.setFillColor(sf::Color::White); 
+	playText.setCharacterSize(NORMAL_SIZE); 
 	playButton.setText(playText); 
 
-	instructionText.setFont(*fontptr); 
-	instructionText.setString("Instructions"); 
-	instructionText.setFillColor(sf::Color::Black); 
-	instructionText.setCharacterSize(96); 
-	instructionButton.setText(instructionText); 
+	manualText.setFont(*fontptr); 
+	manualText.setString("Manual"); 
+	manualText.setFillColor(sf::Color::White); 
+	manualText.setCharacterSize(NORMAL_SIZE); 
+	manualButton.setText(manualText); 
 
 	exitText.setFont(*fontptr); 
 	exitText.setString("Exit"); 
-	exitText.setFillColor(sf::Color::Black); 
-	exitText.setCharacterSize(96); 
+	exitText.setFillColor(sf::Color::White); 
+	exitText.setCharacterSize(NORMAL_SIZE); 
 	exitButton.setText(exitText); 
 
 	playButton.setDefaultFunction([this]() {
-		playText.setFillColor(sf::Color::Black); 
+		playText.setFillColor(sf::Color::White); 
 		playButton.setText(playText); 
 	});
-	instructionButton.setDefaultFunction([this]() {
-		instructionText.setFillColor(sf::Color::Black); 
-		instructionButton.setText(instructionText); 
+	manualButton.setDefaultFunction([this]() {
+		manualText.setFillColor(sf::Color::White); 
+		manualButton.setText(manualText); 
 	});
 	exitButton.setDefaultFunction([this]() {
-		exitText.setFillColor(sf::Color::Black); 
+		exitText.setFillColor(sf::Color::White); 
 		exitButton.setText(exitText); 
 	});
 
@@ -57,18 +57,28 @@ MainMenu::MainMenu() :
 		playText.setFillColor(sf::Color::Red); 
 		playButton.setText(playText); 
 	});
-	instructionButton.setHoverFunction([this]() {
-		instructionText.setFillColor(sf::Color::Red); 
-		instructionButton.setText(instructionText); 
+	manualButton.setHoverFunction([this]() {
+		manualText.setFillColor(sf::Color::Red); 
+		manualButton.setText(manualText); 
 	});
 	exitButton.setHoverFunction([this]() {
 		exitText.setFillColor(sf::Color::Red); 
 		exitButton.setText(exitText); 
 	});
 
+	playButton.setClickFunction([this]() {
+		playButton.notify(*this, DIFFICULTY);
+	});
+	manualButton.setClickFunction([this]() {
+		manualButton.notify(*this, MANUAL);
+	});
+	exitButton.setClickFunction([this]() {
+		exitButton.notify(*this, EXIT);
+	});
+
 	addEntity(&titleBox); 
 	addEntity(&playButton); 
-	addEntity(&instructionButton); 
+	addEntity(&manualButton); 
 	addEntity(&exitButton); 
 }
 
@@ -77,15 +87,12 @@ MainMenu::~MainMenu()
 	delete fontptr; 
 }
 
-
 int MainMenu::recieve(Layer& layer, int status)
 {
-	if (status == -1) {
-		return status;
-	}		
 	return status;
 }
 
 void MainMenu::notify(Layer& layer, int status)
 {
+
 }

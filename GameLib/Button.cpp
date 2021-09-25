@@ -6,6 +6,7 @@ Button::Button(const sf::RectangleShape& hitbox, const sf::Text& text) :
 	m_hitbox = new sf::RectangleShape(hitbox); 
 	m_text = new sf::Text(text); 
 	alignTextCenter(); 
+	alignTextMiddle(); 
 	tags.insert("Button");
 }
 
@@ -69,6 +70,7 @@ void Button::setText(const sf::Text& text)
 	if (m_text) delete m_text; 
 	m_text = new sf::Text(text); 
 	alignTextCenter(); 
+	alignTextMiddle(); 
 }
 
 void Button::setShape(const sf::RectangleShape& hitbox)
@@ -79,31 +81,44 @@ void Button::setShape(const sf::RectangleShape& hitbox)
 
 void Button::alignTextLeft()
 {
-	float hbheight = m_hitbox->getGlobalBounds().height - 2 * m_hitbox->getOutlineThickness(); 
 	float offsetx = 0; 
-	float offsety = (hbheight - m_text->getGlobalBounds().height) / 2; 
-	float gap = m_text->getCharacterSize() - m_text->getGlobalBounds().height; 
-	m_text->setPosition(sf::Vector2f(m_hitbox->getPosition().x + offsetx, m_hitbox->getPosition().y + offsety - gap)); 
+	m_text->setPosition(sf::Vector2f(m_hitbox->getPosition().x + offsetx, m_text->getPosition().y)); 
 }
 
 void Button::alignTextCenter()
 {
 	float hbwidth = m_hitbox->getGlobalBounds().width - 2 * m_hitbox->getOutlineThickness(); 
-	float hbheight = m_hitbox->getGlobalBounds().height - 2 * m_hitbox->getOutlineThickness(); 
 	float offsetx = (hbwidth - m_text->getGlobalBounds().width) / 2;
-	float offsety = (hbheight - m_text->getGlobalBounds().height) / 2; 
-	float gap = m_text->getCharacterSize() - m_text->getGlobalBounds().height; 
-	m_text->setPosition(sf::Vector2f(m_hitbox->getPosition().x + offsetx, m_hitbox->getPosition().y + offsety - gap)); 
+	m_text->setPosition(sf::Vector2f(m_hitbox->getPosition().x + offsetx, m_text->getPosition().y)); 
 }
 
 void Button::alignTextRight()
 {
 	float hbwidth = m_hitbox->getGlobalBounds().width - 2 * m_hitbox->getOutlineThickness(); 
-	float hbheight = m_hitbox->getGlobalBounds().height - 2 * m_hitbox->getOutlineThickness(); 
 	float offsetx = (hbwidth - m_text->getGlobalBounds().width);
+	m_text->setPosition(sf::Vector2f(m_hitbox->getPosition().x + offsetx, m_text->getPosition().y)); 
+}
+
+void Button::alignTextTop()
+{
+	float offsety = 0; 
+	m_text->setPosition(sf::Vector2f(m_text->getPosition().x, m_hitbox->getPosition().y + offsety));
+}
+
+void Button::alignTextMiddle()
+{
+	float hbheight = m_hitbox->getGlobalBounds().height - 2 * m_hitbox->getOutlineThickness(); 
 	float offsety = (hbheight - m_text->getGlobalBounds().height) / 2; 
 	float gap = m_text->getCharacterSize() - m_text->getGlobalBounds().height; 
-	m_text->setPosition(sf::Vector2f(m_hitbox->getPosition().x + offsetx, m_hitbox->getPosition().y + offsety - gap)); 
+	m_text->setPosition(sf::Vector2f(m_text->getPosition().x, m_hitbox->getPosition().y + offsety - gap)); 
+}
+
+void Button::alignTextBottom()
+{
+	float hbheight = m_hitbox->getGlobalBounds().height - 2 * m_hitbox->getOutlineThickness(); 
+	float offsety = hbheight - m_text->getGlobalBounds().height; 
+	float gap = m_text->getCharacterSize() - m_text->getGlobalBounds().height; 
+	m_text->setPosition(sf::Vector2f(m_text->getPosition().x, m_hitbox->getPosition().y + offsety - gap)); 
 }
 
 int Button::main()

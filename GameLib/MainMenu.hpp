@@ -1,32 +1,26 @@
 #pragma once
 #include <SFML/System.hpp>
+#include "Dimension.h"
 #include "Layer.hpp"
 #include "Button.hpp"
 
-#define WWIDTH 1920
-#define WHEIGHT 1080
 
-#define TWIDTH 800
-#define THEIGHT 200
-
-#define BWIDTH 400
-#define BHEIGHT 100
-#define SPACE 100
-#define XOFFSET ((WWIDTH - 3*BWIDTH - 2*SPACE) / 2)
-#define YOFFSET (2 * (WHEIGHT - BHEIGHT) / 3)
+#define MENU_HSPACE 100
+#define MENU_XOFFSET ((WIN_WIDTH - 3*BUTTON_WIDTH - 2*MENU_HSPACE) / 2)
+#define MENU_YOFFSET (2 * (WIN_HEIGHT - BUTTON_HEIGHT) / 3)
 
 class MainMenu : public Layer
 {
 	private: 
 		Button titleBox; 
 		Button playButton; 
-		Button instructionButton; 
+		Button manualButton; 
 		Button exitButton; 
 
 		sf::Font* fontptr; 
 		sf::Text titleText; 
 		sf::Text playText; 
-		sf::Text instructionText; 
+		sf::Text manualText; 
 		sf::Text exitText; 
 
 	public:

@@ -60,6 +60,15 @@
     <ClInclude Include="SceneHandler.hpp">
       <Filter>Header Files\Hotel of Death</Filter>
     </ClInclude>
+    <ClInclude Include="DifficultySelect.hpp">
+      <Filter>Header Files\Hotel of Death</Filter>
+    </ClInclude>
+    <ClInclude Include="Dimension.h">
+      <Filter>Header Files\Hotel of Death</Filter>
+    </ClInclude>
+    <ClInclude Include="Manual.hpp">
+      <Filter>Header Files\Hotel of Death</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Layer.cpp">
@@ -97,6 +106,12 @@
     </ClCompile>
     <ClCompile Include="TimedLayer.cpp">
       <Filter>Source Files\Base</Filter>
+    </ClCompile>
+    <ClCompile Include="DifficultySelect.cpp">
+      <Filter>Source Files\Hotel of Death</Filter>
+    </ClCompile>
+    <ClCompile Include="Manual.cpp">
+      <Filter>Source Files\Hotel of Death</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

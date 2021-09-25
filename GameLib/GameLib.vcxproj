@@ -146,6 +146,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="DifficultySelect.cpp" />
+    <ClCompile Include="Manual.cpp" />
     <ClCompile Include="Timed.cpp" />
     <ClCompile Include="TimedLayer.cpp" />
     <ClCompile Include="Button.cpp" />
@@ -161,6 +163,9 @@
     <ClCompile Include="Timed.hpp" />
     <ClCompile Include="TimedLayer.hpp" />
     <ClInclude Include="Button.hpp" />
+    <ClInclude Include="DifficultySelect.hpp" />
+    <ClInclude Include="Dimension.h" />
+    <ClInclude Include="Manual.hpp" />
     <ClInclude Include="SceneHandler.hpp" />
     <ClInclude Include="MainMenu.hpp" />
     <ClInclude Include="Physical.hpp" />
