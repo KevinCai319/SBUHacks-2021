@@ -1,5 +1,6 @@
 #pragma once
 #include <vector>
+#include <string>
 #include "Floor.hpp"
 #include "Door.hpp"
 #include "Teleporter.hpp"
@@ -26,9 +27,11 @@ class Game:public TimedLayer{
 		sf::Font* fontptr; 
 		sf::Text timeLabel; 
 		sf::Text attemptsLabel;
-		sf::Clock gameTimer;
 		//Time left before game over.
+		sf::Clock gameTimer;
 		float timeLimit = 60;
+		// Clues for each door 
+		std::vector<std::string> clues; 
 		//At the start, there will be a grace period for the player to move around.
 		bool isStart = true;
 		//Generate platforms/Ground, teleporters.
@@ -37,6 +40,7 @@ class Game:public TimedLayer{
 		void findBitArrays();
 		//Create door based on bit arrays.
 		void createTeleporters();
+		void createClues(const Door* door); 
 		void createDoors(); 
 		void updateTimer(); 
 		virtual int recieve(Layer& layer, int status) override;
