@@ -1,5 +1,6 @@
 #include "Teleporter.hpp"
 #include "Player.hpp"
+#include "Line.hpp"
 Teleporter::Teleporter(int sx, int sy, int width, int height, int floor, int circ_rad) :
 	linked(nullptr),
 	sx(sx),
@@ -13,8 +14,10 @@ Teleporter::Teleporter(int sx, int sy, int width, int height, int floor, int cir
 	tags.insert("Teleporter");
 	box = sf::RectangleShape(sf::Vector2f(width,height));
 	circ = sf::CircleShape(circ_rad);
-	box.setOutlineColor(sf::Color::Red);
-	circ.setPosition(sx, sy-height);
+	circ.setFillColor(sf::Color::Transparent);
+	circ.setOutlineThickness(4);
+	circ.setOutlineColor(sf::Color::Cyan);
+	circ.setPosition((sx+width/2)-circ_rad,sy-height/2-circ_rad);
 	box.setPosition(sx, sy-height);
 }
 
@@ -40,8 +43,12 @@ void Teleporter::render(sf::RenderTarget& target, sf::RenderStates states) const
 	for (Layer* p : players) {
 		Player* c = dynamic_cast<Player*>(p);
 		int type = c->type;
-		if (c->getFloor() == floor && c->getL() > box.getGlobalBounds().left && c->getR() > box.getGlobalBounds().left+box.getGlobalBounds().width) {
+		if (c->getFloor() == floor && c->getR() > box.getGlobalBounds().left && c->getL() < box.getGlobalBounds().left+box.getGlobalBounds().width) {
 			target.draw(circ, states);
+			target.draw(linked->circ, states);
+			Line t = Line(circ.getPosition(), linked->circ.getPosition(),5);
+			t.setColor(sf::Color::Cyan);
+			target.draw(t, states);
 		}
 	}
 }

@@ -17,14 +17,14 @@ const sf::Shape& Floor::getShape()
 	return ground;
 }
 
-Teleporter* Floor::placeT(int W)
+Teleporter* Floor::placeT(int W,int H)
 {
 	int s = spots.size();
 	for (int i = 0; i < 100; i++) {
 		int idx = rand()%s;
 		if (spots[idx] == 0) {
 			spots[idx] = 1;
-			return new Teleporter(ground.getGlobalBounds().left+W*idx,ground.getGlobalBounds().top,W/2-12,height/2,floorNumber,W*.5);
+			return new Teleporter(ground.getGlobalBounds().left+W*idx,ground.getGlobalBounds().top,W/2-12,height/2,floorNumber,H);
 		}
 	}
 	return nullptr;

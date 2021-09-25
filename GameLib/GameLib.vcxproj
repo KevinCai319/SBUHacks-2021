@@ -150,6 +150,7 @@
     <ClCompile Include="Door.cpp" />
     <ClCompile Include="Floor.cpp" />
     <ClCompile Include="Game.cpp" />
+    <ClCompile Include="Line.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="Teleporter.cpp" />
     <ClCompile Include="DifficultySelect.cpp" />
@@ -173,6 +174,7 @@
     <ClInclude Include="Door.hpp" />
     <ClInclude Include="Floor.hpp" />
     <ClInclude Include="Game.hpp" />
+    <ClInclude Include="Line.hpp" />
     <ClInclude Include="Player.hpp" />
     <ClInclude Include="DifficultySelect.hpp" />
     <ClInclude Include="Dimension.h" />

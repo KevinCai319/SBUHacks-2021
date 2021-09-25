@@ -82,7 +82,7 @@ void Layer::killChildren()
 void Layer::draw(sf::RenderTarget& target, sf::RenderStates states) const {
 
 	states.transform *= getTransform();
-	for (const Layer* group : toUpdate) {
+	for (const Layer* group : toRender) {
 		target.draw(*group, states);
 	}
 	render(target, states);
@@ -95,6 +95,8 @@ void Layer::createEntities() {
 	{
 		Layer* newEntity = addEntityQueue.front();
 		newEntity->linkParent(this);
+		toRender.push_back(newEntity);
+		std::sort(toRender.begin(), toRender.end(), [](Layer* a, Layer* b) { return a->renderPriority < b->renderPriority; });
 		if (!newEntity->tags.empty())
 		{
 			std::set<std::string> tagsToBeAdded = newEntity->tags;
@@ -130,7 +132,8 @@ void Layer::destroyEntities()
 			removeEntityQueue.pop();
 		}
 		toUpdate.erase(garbageEntity);
-		
+		remove(toRender.begin(), toRender.end(), garbageEntity);
+
 	}
 }
 

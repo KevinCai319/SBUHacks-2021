@@ -22,6 +22,7 @@ class Layer : public sf::Drawable, public sf::Transformable
 		bool skipUpdate = false;
 		//List of all tags that this layer contains.
 		std::set<std::string> tags; 
+		int renderPriority=0;
 
 		//constructor/destructor
 		Layer();
@@ -46,11 +47,11 @@ class Layer : public sf::Drawable, public sf::Transformable
 		const std::set<Layer*>& getTag(const std::string& tag);
 		Layer& getUniqueEntity(const std::string& tag);
 		bool modifyEntityTag(Layer* layer, const std::string& oldTag, const std::string& newTag);
-
 	protected:
 		//Collections of objects.
 		std::unordered_map<std::string, std::set<Layer*>> entities;
 		std::set<Layer*> toUpdate;
+		std::vector<Layer*> toRender;
 		std::queue<Layer*> addEntityQueue;
 		std::queue<Layer*> removeEntityQueue;
 
@@ -59,6 +60,7 @@ class Layer : public sf::Drawable, public sf::Transformable
 		
 		//optional status variable which can be used by implementations.
 		int status = 0;
+		
 
 		int updateChildren();
 		void killAll();
