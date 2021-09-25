@@ -38,14 +38,13 @@ Game::Game(int difficulty) :
 	addEntity(player);
 	createEntities();
 	createTeleporters();
-	//createEntities();
 }
 
 int Game::main()
 {
 	int res = TimedLayer::main();
 	//Game Over
-	if (gameTimer.getElapsedTime().asSeconds() > timeLimit)return 4;
+	if (gameTimer.getElapsedTime().asSeconds() > timeLimit)return 9;
 	return res;
 }
 
@@ -93,8 +92,8 @@ void Game::createTeleporters()
 			i = rand() % (s);
 			j = rand() % (s);
 		}
-		tp[i]->linked = tp[j];
-		tp[j]->linked = tp[i];
+		tp[i]->updateLinked(tp[j]);
+		tp[j]->updateLinked(tp[i]);
 		addEntity(tp[i]);
 		addEntity(tp[j]);
 		available[tp[i]->floor]++;

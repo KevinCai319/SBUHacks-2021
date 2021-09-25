@@ -10,6 +10,9 @@ class Player : public Physical, public Timed{
 		int getL();
 		int getR();
 		int type = 0;//If 1, it is AI
+		//Time after teleport where you can't teleport back.
+		float tDebounce = 0.5f;
+		float tdCounter = 0.0f;
 	protected:
 		virtual int recieve(Layer& layer, int status)override;
 		virtual void render(sf::RenderTarget& target, sf::RenderStates states)const override;

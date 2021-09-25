@@ -1,6 +1,6 @@
 #include "Teleporter.hpp"
 #include "Player.hpp"
-#include "Line.hpp"
+
 Teleporter::Teleporter(int sx, int sy, int width, int height, int floor, int circ_rad) :
 	linked(nullptr),
 	sx(sx),
@@ -11,7 +11,7 @@ Teleporter::Teleporter(int sx, int sy, int width, int height, int floor, int cir
 	circ_rad(circ_rad),
 	Physical()
 {
-	renderPriority = 2;
+	renderPriority = 1;
 	tags.insert("Teleporter");
 	box = sf::RectangleShape(sf::Vector2f(width,height));
 	circ = sf::CircleShape(circ_rad);
@@ -24,12 +24,45 @@ Teleporter::Teleporter(int sx, int sy, int width, int height, int floor, int cir
 
 int Teleporter::main()
 {
+	
+	std::set<Layer*> players = parent->getTag("Player");
+	for (Layer* p : players) {
+		Player* c = dynamic_cast<Player*>(p);
+		int type = c->type;
+		if (c->getFloor() == floor && c->getR() > box.getGlobalBounds().left && c->getL() < box.getGlobalBounds().left + box.getGlobalBounds().width) {
+			renderPriority = 2;
+			renderLink = true;
+		}
+		else {
+			renderPriority = 1;
+			renderLink = false;
+		}
+	}
 	return 0;
 }
 
 const sf::Shape& Teleporter::getShape()
 {
 	return box;
+}
+
+void Teleporter::updateLinked(Teleporter* link)
+{
+	linked = link;
+	sf::Vector2f a = circ.getPosition();
+	a.x += circ_rad;
+	a.y += circ_rad;
+	sf::Vector2f b = linked->circ.getPosition();
+	b.x += circ_rad;
+	b.y += circ_rad;
+	sf::Vector2f d = a - b;
+	d /= sqrt(powf(d.x, 2) + powf(d.y, 2));
+	d.x *= circ_rad;
+	d.y *= circ_rad;
+	a -= d;
+	b += d;
+	linkLine = Line(a, b, 5);
+	linkLine.setColor(sf::Color::Cyan);
 }
 
 int Teleporter::recieve(Layer& layer, int status)
@@ -40,29 +73,11 @@ int Teleporter::recieve(Layer& layer, int status)
 void Teleporter::render(sf::RenderTarget& target, sf::RenderStates states) const
 {
 	target.draw(box, states);
-	std::set<Layer*> players = parent->getTag("Player");
-	for (Layer* p : players) {
-		Player* c = dynamic_cast<Player*>(p);
-		int type = c->type;
-		if (c->getFloor() == floor && c->getR() > box.getGlobalBounds().left && c->getL() < box.getGlobalBounds().left+box.getGlobalBounds().width) {
-			target.draw(circ, states);
-			target.draw(linked->circ, states);
+	if (renderLink) {
+		target.draw(circ, states);
+		target.draw(linked->circ, states);
+		target.draw(linkLine, states);
+	}else {
 
-			sf::Vector2f a = circ.getPosition();
-			a.x += circ_rad;
-			a.y += circ_rad;
-			sf::Vector2f b = linked->circ.getPosition();
-			b.x += circ_rad;
-			b.y += circ_rad;
-			sf::Vector2f d = a - b;
-			d /= sqrt(powf(d.x, 2) + powf(d.y, 2));
-			d.x *= circ_rad;
-			d.y *= circ_rad;
-			a -= d;
-			b += d;
-			Line t = Line(a,b,5);
-			t.setColor(sf::Color::Cyan);
-			target.draw(t, states);
-		}
 	}
 }

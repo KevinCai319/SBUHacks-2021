@@ -1,5 +1,5 @@
 #include "Player.hpp"
-
+#include "Teleporter.hpp"
 Player::Player(int sx, int sy, int width, int height, float velocity, int lbound, int rbound, int floor, sf::Keyboard::Key left, sf::Keyboard::Key right, sf::Keyboard::Key interact) :
 	left(left),
 	right(right),
@@ -32,8 +32,20 @@ int Player::main(float dt)
 		}
 	}
 	if (sf::Keyboard::isKeyPressed(interact)) {
-		//parent->getTag("Physical");
-		//return 3;
+		std::set<Layer*> teleporters = parent->getTag("Teleporter");
+		for (Layer* i : teleporters) {
+			Teleporter* tp = dynamic_cast<Teleporter*>(i);
+			if (getFloor() == tp->floor && getR() > tp->sx && getL() < tp->sx + tp->width) {
+				if (tdCounter <= 0.0f) {
+					box.setPosition(tp->linked->sx,tp->linked->sy-height);
+					tdCounter = tDebounce;
+					floor = tp->linked->floor;
+				}
+			}
+		}
+	}
+	if (tdCounter > 0.0f) {
+		tdCounter -= dt;
 	}
 	return 0;
 }
