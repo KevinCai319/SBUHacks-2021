@@ -25,6 +25,7 @@ class Game:public TimedLayer{
 		//Labels for the player before they die.
 		sf::Font* fontptr; 
 		sf::Text timeLabel; 
+		sf::Text attemptsLabel;
 		sf::Clock gameTimer;
 		//Time left before game over.
 		float timeLimit = 60;
@@ -41,5 +42,6 @@ class Game:public TimedLayer{
 		virtual int recieve(Layer& layer, int status) override;
 		virtual void notify(Layer& layer, int status) override;
 		virtual void render(sf::RenderTarget& target, sf::RenderStates states) const override; 
+		void createPlayer(sf::Keyboard::Key L, sf::Keyboard::Key R, sf::Keyboard::Key T, sf::Keyboard::Key D, bool isFriendly);
 };
 

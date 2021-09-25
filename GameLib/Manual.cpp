@@ -21,7 +21,7 @@ Manual::Manual() :
 	headerBox.setText(headerText); 
 
 	manualText.setFont(*fontptr); 
-	manualText.setString("How to Play:\n A : Go left \n D : Go right \n W : Interact"); 
+	manualText.setString("How to Play:\n A : Go left \n D : Go right \n W : Open Door\n S : Teleport"); 
 	manualText.setFillColor(sf::Color::White); 
 	manualText.setCharacterSize(MAN_SIZE); 
 	manualBox.setText(manualText); 

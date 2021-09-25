@@ -27,23 +27,22 @@ Game::Game(int difficulty) :
 			numFloors = 4; break;
 	}
 	createFloors(numFloors);
-	int p_bez = 12;
-	srand(std::time(NULL));
-	int player_floor = rand()%numFloors;
-	int pheight = (fheight - (Floor::height - p_bez))*.67;
-	int player_spawn_y = 1080 - (fheight * (player_floor)) - Floor::height - pheight;
-	int pwidth = numFloors*(1920 - Floor::bezel) / (2*numDoors) -p_bez;
-	int player_spawn_x = Floor::bezel / 2 + (rand()%pwidth) * ((1920 - Floor::bezel) / pwidth);
   fontptr = new sf::Font(); 
 	fontptr->loadFromFile("Assets\\youmurdererbb_reg.ttf"); 
 	timeLabel.setFont(*fontptr); 
 	timeLabel.setPosition(0, 0); 
 	timeLabel.setCharacterSize(BUTTON_SIZE); 
 	timeLabel.setFillColor(sf::Color::White); 
-	gameTimer.restart(); 
-	updateTimer(); 
-	Player* player = new Player(player_spawn_x, player_spawn_y, pwidth, pheight, (1920.0f - Floor::bezel), Floor::bezel / 2, (1920 - Floor::bezel/2), player_floor,sf::Keyboard::A, sf::Keyboard::D, sf::Keyboard::S, sf::Keyboard::W);
-	addEntity(player);
+	attemptsLabel.setFont(*fontptr);
+	attemptsLabel.setPosition(0,WIN_HEIGHT*.75);
+	attemptsLabel.setCharacterSize(BUTTON_SIZE);
+	attemptsLabel.setFillColor(sf::Color::White);
+	attemptsLabel.setString("Attempts\nLeft:\n3");
+	gameTimer.restart();
+	updateTimer();
+	srand(std::time(NULL));
+	createPlayer(sf::Keyboard::A, sf::Keyboard::D, sf::Keyboard::S, sf::Keyboard::W,true);
+	createPlayer(sf::Keyboard::Left, sf::Keyboard::Right, sf::Keyboard::Down, sf::Keyboard::Up,false);
 	createEntities();
 	createTeleporters();
 	createDoors(); 
@@ -135,7 +134,6 @@ void Game::createDoors()
 			id++;
 		}
 	}
-
 }
 
 void Game::updateTimer()
@@ -155,12 +153,14 @@ int Game::recieve(Layer& layer, int status)
 			return 10;
 		case 2://Player guesses incorrect door
 			doorsOpened++;
+			attemptsLabel.setString("Attempts\nLeft:\n"+std::to_string(3-doorsOpened));
 			if (doorsOpened > 2) {//3 tries and ur out
 				return 7;
 			}else {
 				return 0;
 			}
-		case 3://Grab timer data.
+		case 3://Player gets caught.
+			return 7;
 
 			break;
 	}
@@ -174,4 +174,20 @@ void Game::notify(Layer& layer, int status)
 void Game::render(sf::RenderTarget& target, sf::RenderStates states) const
 {
 	target.draw(timeLabel, states); 
+	target.draw(attemptsLabel, states);
+}
+
+void Game::createPlayer(sf::Keyboard::Key L, sf::Keyboard::Key R, sf::Keyboard::Key T,sf::Keyboard::Key D,bool isFriendly)
+{
+	int p_bez = 12;
+	int player_floor = rand() % numFloors;
+	int pheight = (fheight - (Floor::height - p_bez)) * .67;
+	int player_spawn_y = 1080 - (fheight * (player_floor)) - Floor::height - pheight;
+	int pwidth = numFloors * (1920 - Floor::bezel) / (2 * numDoors) - p_bez;
+	int player_spawn_x = Floor::bezel / 2 + (rand() % pwidth) * ((1920 - Floor::bezel) / pwidth);
+	Player* player = new Player(player_spawn_x, player_spawn_y, pwidth, pheight, (1920.0f - Floor::bezel), Floor::bezel / 2, (1920 - Floor::bezel / 2), player_floor, L,R,T,D);
+	if (!isFriendly) {
+		player->type = 1;
+	}
+	addEntity(player);
 }

@@ -31,7 +31,20 @@ int Teleporter::main()
 		int type = c->type;
 		if (c->getFloor() == floor && c->getR() > box.getGlobalBounds().left && c->getL() < box.getGlobalBounds().left + box.getGlobalBounds().width) {
 			renderPriority = 2;
+			if (!type) {
+				circ.setOutlineColor(sf::Color::Cyan);
+				linkLine.setColor(sf::Color::Cyan);
+				linked->circ.setOutlineColor(sf::Color::Cyan);
+				linked->linkLine.setColor(sf::Color::Cyan);
+			}
+			else {
+				circ.setOutlineColor(sf::Color(255,155,0));
+				linkLine.setColor(sf::Color(255, 155, 0));
+				linked->circ.setOutlineColor(sf::Color(255, 155, 0));
+				linked->linkLine.setColor(sf::Color(255, 155, 0));
+			}
 			renderLink = true;
+			return 0;
 		}
 		else {
 			renderPriority = 1;

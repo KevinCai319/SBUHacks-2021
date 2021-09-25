@@ -26,6 +26,12 @@ Player::Player(int sx, int sy, int width, int height, float velocity, int lbound
 int Player::main(float dt)
 {
 	status = 0;
+	if (type) {
+		box.setOutlineColor(sf::Color::Red);
+	}
+	else {
+		box.setOutlineColor(sf::Color::Green);
+	}
 	if (sf::Keyboard::isKeyPressed(left)) {
 		if (box.getGlobalBounds().left - velocity * dt > lbound) {
 			box.move(sf::Vector2f(-velocity * dt, 0));
@@ -53,7 +59,7 @@ int Player::main(float dt)
 	}
 	else {
 		if (sf::Keyboard::isKeyPressed(open)) {
-			if (odCounter <= 0.0f) {
+			if (odCounter <= 0.0f&&type==0) {
 				std::set<Layer*> doors = parent->getTag("Door");
 				for (Layer* i : doors)
 				{
@@ -70,6 +76,19 @@ int Player::main(float dt)
 					}
 				}
 			}
+			else if (type == 1) {
+				std::set<Layer*> players = parent->getTag("Player");
+				for (Layer* p : players) {
+					Player* c = dynamic_cast<Player*>(p);
+					if (!(c->type)) {
+						if (c->rbound > lbound && c->lbound < rbound) {
+	
+							return 3;//
+						}
+					}
+				}
+			}
+
 		}
 	}
 	if (tdCounter > 0.0f) {
