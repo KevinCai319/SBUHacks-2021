@@ -21,8 +21,7 @@ Button::Button(float x, float y, float w, float h) :
 {
 	m_hitbox = new sf::RectangleShape(sf::Vector2f(w, h)); 
 	m_hitbox->setPosition(sf::Vector2f(x, y)); 
-	m_hitbox->setOutlineColor(sf::Color::Red); 
-	m_hitbox->setOutlineThickness(20); 
+	m_hitbox->setFillColor(sf::Color::Transparent); 
 	tags.insert("Button"); 
 }
 

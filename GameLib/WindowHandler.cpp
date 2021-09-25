@@ -11,7 +11,7 @@ WindowHandler::WindowHandler(int x, int y, const std::string& title, Layer* defa
 
 void WindowHandler::render()
 {
-	window.clear();
+	window.clear(bgColor);
 	if (running) {
 		window.draw(*running, sf::RenderStates::Default);
 	}
@@ -44,3 +44,7 @@ int WindowHandler::recieve(Layer& layer, int status)
 	return 0;
 }
 
+void WindowHandler::setBGColor(sf::Color& bg)
+{
+	bgColor = bg; 
+}
