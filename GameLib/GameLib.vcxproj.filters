@@ -84,6 +84,12 @@
     <ClInclude Include="Teleporter.hpp">
       <Filter>Header Files\Hotel of Death\GameObjects</Filter>
     </ClInclude>
+    <ClInclude Include="Player.hpp">
+      <Filter>Header Files\Hotel of Death\GameObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="Clue.hpp">
+      <Filter>Header Files\Hotel of Death\GameObjects</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Layer.cpp">
@@ -132,6 +138,12 @@
       <Filter>Source Files\Hotel of Death\GameObjects</Filter>
     </ClCompile>
     <ClCompile Include="Teleporter.cpp">
+      <Filter>Source Files\Hotel of Death\GameObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="Player.cpp">
+      <Filter>Source Files\Hotel of Death\GameObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="Clue.cpp">
       <Filter>Source Files\Hotel of Death\GameObjects</Filter>
     </ClCompile>
   </ItemGroup>
