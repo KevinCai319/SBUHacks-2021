@@ -27,6 +27,7 @@ class Game:public TimedLayer{
 		sf::Font* fontptr; 
 		sf::Text timeLabel; 
 		sf::Text attemptsLabel;
+		sf::Text clueLabel; 
 		//Time left before game over.
 		sf::Clock gameTimer;
 		float timeLimit = 60;
@@ -43,6 +44,7 @@ class Game:public TimedLayer{
 		void createClues(const Door* door); 
 		void createDoors(); 
 		void updateTimer(); 
+		void updateClue(); 
 		virtual int recieve(Layer& layer, int status) override;
 		virtual void notify(Layer& layer, int status) override;
 		virtual void render(sf::RenderTarget& target, sf::RenderStates states) const override; 

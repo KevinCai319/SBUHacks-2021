@@ -33,11 +33,18 @@ Game::Game(int difficulty) :
 	timeLabel.setPosition(0, 0); 
 	timeLabel.setCharacterSize(BUTTON_SIZE); 
 	timeLabel.setFillColor(sf::Color::White); 
+
 	attemptsLabel.setFont(*fontptr);
 	attemptsLabel.setPosition(0,WIN_HEIGHT*.75);
 	attemptsLabel.setCharacterSize(BUTTON_SIZE);
 	attemptsLabel.setFillColor(sf::Color::White);
 	attemptsLabel.setString("Attempts\nLeft:\n3");
+
+	clueLabel.setFont(*fontptr); 
+	clueLabel.setPosition(WIN_WIDTH - Floor::bezel / 2, 0); 
+	clueLabel.setCharacterSize(BUTTON_SIZE); 
+	clueLabel.setFillColor(sf::Color::White); 
+
 	gameTimer.restart();
 	updateTimer();
 	srand(std::time(NULL));
@@ -54,6 +61,7 @@ int Game::main()
 	//Game Over
 	if (gameTimer.getElapsedTime().asSeconds() > timeLimit)return 7;
 	updateTimer(); 
+	updateClue(); 
 	return res;
 }
 
@@ -122,17 +130,17 @@ void Game::createClues(const Door* door)
 	const std::string SHAPES[] = {"H Line", "Square", "Circle", "V Line"};
 
 	if (door->id % 2 == 0)
-		clues.push_back("Door is even");
+		clues.push_back("Door is \n even");
 	else
-		clues.push_back("Door is odd");
+		clues.push_back("Door is \n odd");
 
 	if (door->floor % 2 == 0)
-		clues.push_back("Door is on even floor");
+		clues.push_back("Door is \n on even \n floor");
 	else
-		clues.push_back("Door is on odd floor"); 
+		clues.push_back("Door is \n on odd \n floor"); 
 
-	clues.push_back("Door is " + COLORS[door->color]); 
-	clues.push_back("Door is " + SHAPES[door->shape]);
+	clues.push_back("Door is \n" + COLORS[door->color]); 
+	clues.push_back("Door is \n" + SHAPES[door->shape]);
 }
 
 void Game::createDoors()
@@ -164,6 +172,12 @@ void Game::updateTimer()
 {
 	float timeLeft = timeLimit - gameTimer.getElapsedTime().asSeconds(); 
 	timeLabel.setString(std::to_string((int) timeLeft)); 
+}
+
+void Game::updateClue()
+{
+	int clueNo = (int) (gameTimer.getElapsedTime().asSeconds() / (timeLimit / (clues.size() + 1))); 
+	clueLabel.setString(clues[clueNo]); 
 }
 
 int Game::recieve(Layer& layer, int status)
@@ -199,6 +213,7 @@ void Game::render(sf::RenderTarget& target, sf::RenderStates states) const
 {
 	target.draw(timeLabel, states); 
 	target.draw(attemptsLabel, states);
+	target.draw(clueLabel, states); 
 }
 
 void Game::createPlayer(sf::Keyboard::Key L, sf::Keyboard::Key R, sf::Keyboard::Key T,sf::Keyboard::Key D,bool isFriendly)
