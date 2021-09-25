@@ -167,8 +167,8 @@
     <ClCompile Include="Handler.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Timed.hpp" />
-    <ClCompile Include="TimedLayer.hpp" />
+    <ClInclude Include="Timed.hpp" />
+    <ClInclude Include="TimedLayer.hpp" />
     <ClInclude Include="Button.hpp" />
     <ClInclude Include="Clue.hpp" />
     <ClInclude Include="Door.hpp" />

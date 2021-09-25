@@ -36,8 +36,9 @@ Game::Game(int difficulty) :
 	int player_spawn_x = Floor::bezel / 2 + (rand()%pwidth) * ((1920 - Floor::bezel) / pwidth);
 	Player* player = new Player(player_spawn_x, player_spawn_y, pwidth, pheight, (1920.0f - Floor::bezel), Floor::bezel / 2, (1920 - Floor::bezel/2), player_floor,sf::Keyboard::A, sf::Keyboard::D, sf::Keyboard::W);
 	addEntity(player);
-	createTeleporters();
 	createEntities();
+	createTeleporters();
+	//createEntities();
 }
 
 int Game::main()

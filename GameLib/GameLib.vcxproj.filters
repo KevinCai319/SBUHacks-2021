@@ -19,8 +19,8 @@
     <ClCompile Include="WindowHandler.cpp" />
     <ClCompile Include="Layer.cpp" />
     <ClCompile Include="Handler.cpp" />
-    <ClCompile Include="Timed.hpp" />
-    <ClCompile Include="TimedLayer.hpp" />
+    <ClCompile Include="Timed.cpp" />
+    <ClCompile Include="TimedLayer.cpp" />
     <ClCompile Include="Line.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -41,5 +41,7 @@
     <ClInclude Include="Layer.hpp" />
     <ClInclude Include="Handler.hpp" />
     <ClInclude Include="Line.hpp" />
+    <ClInclude Include="Timed.hpp" />
+    <ClInclude Include="TimedLayer.hpp" />
   </ItemGroup>
 </Project>

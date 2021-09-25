@@ -11,6 +11,7 @@ Teleporter::Teleporter(int sx, int sy, int width, int height, int floor, int cir
 	circ_rad(circ_rad),
 	Physical()
 {
+	renderPriority = 2;
 	tags.insert("Teleporter");
 	box = sf::RectangleShape(sf::Vector2f(width,height));
 	circ = sf::CircleShape(circ_rad);
@@ -46,7 +47,20 @@ void Teleporter::render(sf::RenderTarget& target, sf::RenderStates states) const
 		if (c->getFloor() == floor && c->getR() > box.getGlobalBounds().left && c->getL() < box.getGlobalBounds().left+box.getGlobalBounds().width) {
 			target.draw(circ, states);
 			target.draw(linked->circ, states);
-			Line t = Line(circ.getPosition(), linked->circ.getPosition(),5);
+
+			sf::Vector2f a = circ.getPosition();
+			a.x += circ_rad;
+			a.y += circ_rad;
+			sf::Vector2f b = linked->circ.getPosition();
+			b.x += circ_rad;
+			b.y += circ_rad;
+			sf::Vector2f d = a - b;
+			d /= sqrt(powf(d.x, 2) + powf(d.y, 2));
+			d.x *= circ_rad;
+			d.y *= circ_rad;
+			a -= d;
+			b += d;
+			Line t = Line(a,b,5);
 			t.setColor(sf::Color::Cyan);
 			target.draw(t, states);
 		}
