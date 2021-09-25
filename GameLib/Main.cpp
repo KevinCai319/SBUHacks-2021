@@ -1,7 +1,7 @@
 #include "SceneHandler.hpp"
-#include "MainMenu.hpp"
+#include "Game.hpp"
 int main() {
-	SceneHandler* main = new SceneHandler(1920, 1080, "Hotel of Death", new MainMenu());
+	SceneHandler* main = new SceneHandler(1920, 1080, "Hotel of Death", new Game(1));
 
 	while (main->update() == 0) {
 		main->render();
