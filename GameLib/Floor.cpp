@@ -24,7 +24,7 @@ Teleporter* Floor::placeT(int W,int H)
 		int idx = rand()%s;
 		if (spots[idx] == 0) {
 			spots[idx] = 1;
-			return new Teleporter(ground.getGlobalBounds().left+W*idx,ground.getGlobalBounds().top,W/2-12,height/2,floorNumber,H);
+			return new Teleporter(ground.getGlobalBounds().left+0.5*W+W*idx,ground.getGlobalBounds().top,W/2-12,height/2,floorNumber,H);
 		}
 	}
 	return nullptr;

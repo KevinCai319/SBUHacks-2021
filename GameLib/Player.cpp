@@ -21,6 +21,7 @@ Player::Player(int sx, int sy, int width, int height, float velocity, int lbound
 
 int Player::main(float dt)
 {
+	status = 0;
 	if (sf::Keyboard::isKeyPressed(left)) {
 		if (box.getGlobalBounds().left - velocity * dt > lbound) {
 			box.move(sf::Vector2f(-velocity * dt, 0));
@@ -41,6 +42,7 @@ int Player::main(float dt)
 					box.setPosition(tp->linked->sx, tp->linked->sy - height);
 					tdCounter = tDebounce;
 					floor = tp->linked->floor;
+					return status;
 				}
 			}
 		}
@@ -50,7 +52,11 @@ int Player::main(float dt)
 			Door* dr = dynamic_cast<Door*>(i); 
 			if (getFloor() == dr->getFloor() && getR() > dr->getStart().x && getL() < dr->getStart().x + dr->getSize().x)
 			{
-				// TODO: show clue 
+				if (dr->isGood) {
+					status = 1;
+				}else {
+					status = 2;
+				}
 			}
 		}
 	}

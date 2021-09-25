@@ -109,16 +109,20 @@ void Game::createTeleporters()
 
 void Game::createDoors()
 {
-	float dwidth = (Floor::width * 0.6) / (numDoors / numFloors); 
-	float dheight = Floor::height * 0.9; 
-	float space = (numDoors * dwidth) / (numDoors + 1); 
+	int doorsOnFloor = numDoors / numFloors;
+	float spcW = (Floor::width * .5) / doorsOnFloor;
+	float dwidth = spcW * 0.8;
+	float dheight = (fheight-Floor::height) * 0.75;
+	int id = 1;
 	for (int f = 0; f < numFloors; ++f)
 	{
 		float sy = 1080-f*fheight-Floor::height - dheight;  
-		for (int d = 0; d < numDoors / numFloors; ++d)
+		float left = Floor::bezel / 2 + spcW * 0.1;
+		for (int d = 0; d < doorsOnFloor; ++d)
 		{
-			float sx = Floor::bezel / 2 + d * dwidth + (d + 1) * space; 
-			addEntity(new Door(sx, sy, dwidth, dheight, f)); 
+			addEntity(new Door(left, sy, dwidth, dheight, f,rand()%6,rand()%4,id)); 
+			left += spcW*2;
+			id++;
 		}
 	}
 }
