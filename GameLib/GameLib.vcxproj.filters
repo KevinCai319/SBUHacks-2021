@@ -37,6 +37,18 @@
     <Filter Include="Source Files\Hotel of Death">
       <UniqueIdentifier>{ddc4e55a-7ed3-4883-b868-d2617c2035b9}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Hotel of Death\Scenes">
+      <UniqueIdentifier>{5e68b1ab-7090-4156-a355-fbd7c4614089}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Hotel of Death\Scenes">
+      <UniqueIdentifier>{6c798213-e5d2-46ef-a891-c4ff781d5298}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Hotel of Death\GameObjects">
+      <UniqueIdentifier>{f355b58b-bafb-4c3a-8bc1-a0b7e2efcdd2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Hotel of Death\GameObjects">
+      <UniqueIdentifier>{e44c908d-8512-4ac6-96f4-5b7ce76b13f1}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Layer.hpp">
@@ -54,12 +66,29 @@
     <ClInclude Include="Button.hpp">
       <Filter>Header Files\UI</Filter>
     </ClInclude>
-    <ClInclude Include="MainMenu.hpp">
-      <Filter>Header Files\Hotel of Death</Filter>
-    </ClInclude>
     <ClInclude Include="SceneHandler.hpp">
       <Filter>Header Files\Hotel of Death</Filter>
     </ClInclude>
+    <ClInclude Include="MainMenu.hpp">
+      <Filter>Header Files\Hotel of Death\Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="Game.hpp">
+      <Filter>Header Files\Hotel of Death\Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="Floor.hpp">
+      <Filter>Header Files\Hotel of Death\GameObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="Door.hpp">
+      <Filter>Header Files\Hotel of Death\GameObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="Teleporter.hpp">
+      <Filter>Header Files\Hotel of Death\GameObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="Player.hpp">
+      <Filter>Header Files\Hotel of Death\GameObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="Clue.hpp">
+      <Filter>Header Files\Hotel of Death\GameObjects</Filter>
     <ClInclude Include="DifficultySelect.hpp">
       <Filter>Header Files\Hotel of Death</Filter>
     </ClInclude>
@@ -89,9 +118,6 @@
     <ClCompile Include="Button.cpp">
       <Filter>Source Files\UI</Filter>
     </ClCompile>
-    <ClCompile Include="MainMenu.cpp">
-      <Filter>Source Files\Hotel of Death</Filter>
-    </ClCompile>
     <ClCompile Include="SceneHandler.cpp">
       <Filter>Source Files\Hotel of Death</Filter>
     </ClCompile>
@@ -107,6 +133,26 @@
     <ClCompile Include="TimedLayer.cpp">
       <Filter>Source Files\Base</Filter>
     </ClCompile>
+    <ClCompile Include="Game.cpp">
+      <Filter>Source Files\Hotel of Death\Scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="MainMenu.cpp">
+      <Filter>Source Files\Hotel of Death\Scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="Floor.cpp">
+      <Filter>Source Files\Hotel of Death\GameObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="Door.cpp">
+      <Filter>Source Files\Hotel of Death\GameObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="Teleporter.cpp">
+      <Filter>Source Files\Hotel of Death\GameObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="Player.cpp">
+      <Filter>Source Files\Hotel of Death\GameObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="Clue.cpp">
+      <Filter>Source Files\Hotel of Death\GameObjects</Filter>
     <ClCompile Include="DifficultySelect.cpp">
       <Filter>Source Files\Hotel of Death</Filter>
     </ClCompile>

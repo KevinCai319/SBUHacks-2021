@@ -1,13 +1,13 @@
 #pragma once
 #include <SFML/System.hpp>
-#include "Layer.hpp"
+#include "Timed.hpp"
 class TimedLayer : public Layer
 {
-private: 
-	sf::Clock timer; 
-	sf::Time time;
-public: 
-	TimedLayer(); 
-	virtual int main() override; 
+	public:
+		TimedLayer();
+		float time = 0.0f;
+		virtual int main() override;
+	private: 
+		sf::Clock timer; 
 };
 

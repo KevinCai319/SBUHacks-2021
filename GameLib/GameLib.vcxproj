@@ -146,6 +146,12 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Clue.cpp" />
+    <ClCompile Include="Door.cpp" />
+    <ClCompile Include="Floor.cpp" />
+    <ClCompile Include="Game.cpp" />
+    <ClCompile Include="Player.cpp" />
+    <ClCompile Include="Teleporter.cpp" />
     <ClCompile Include="DifficultySelect.cpp" />
     <ClCompile Include="Manual.cpp" />
     <ClCompile Include="Timed.cpp" />
@@ -163,12 +169,18 @@
     <ClCompile Include="Timed.hpp" />
     <ClCompile Include="TimedLayer.hpp" />
     <ClInclude Include="Button.hpp" />
+    <ClInclude Include="Clue.hpp" />
+    <ClInclude Include="Door.hpp" />
+    <ClInclude Include="Floor.hpp" />
+    <ClInclude Include="Game.hpp" />
+    <ClInclude Include="Player.hpp" />
     <ClInclude Include="DifficultySelect.hpp" />
     <ClInclude Include="Dimension.h" />
     <ClInclude Include="Manual.hpp" />
     <ClInclude Include="SceneHandler.hpp" />
     <ClInclude Include="MainMenu.hpp" />
     <ClInclude Include="Physical.hpp" />
+    <ClInclude Include="Teleporter.hpp" />
     <ClInclude Include="WindowHandler.hpp" />
     <ClInclude Include="Layer.hpp" />
     <ClInclude Include="Handler.hpp" />

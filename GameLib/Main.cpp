@@ -1,8 +1,9 @@
 #include <SFML/Graphics.hpp>
 #include "Dimension.h"
 #include "SceneHandler.hpp"
-#include "MainMenu.hpp"
+#include "Game.hpp"
 int main() {
+	SceneHandler* main = new SceneHandler(1920, 1080, "Hotel of Death", new Game(2));
 	SceneHandler* main = new SceneHandler(WIN_WIDTH, WIN_HEIGHT, "Hotel of Death", new MainMenu());
 	sf::Color bg(23, 23, 23); 
 	main->setBGColor(bg); 
