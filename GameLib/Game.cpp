@@ -28,11 +28,12 @@ Game::Game(int difficulty) :
 	}
 	createFloors(numFloors);
 	int p_bez = 12;
+	srand(std::time(NULL));
 	int player_floor = rand()%numFloors;
 	int player_spawn_y = fheight* player_floor +p_bez;
-	int pwidth = (1920 - Floor::bezel) / (numDoors / numFloors * 2);
-	int player_spawn_x = Floor::bezel + rand() % pwidth * (1920 - Floor::bezel) / pwidth;
-	Player* player = new Player(player_spawn_x+p_bez/2, player_spawn_y, pwidth - p_bez, fheight - Floor::height-p_bez, (1920.0f - Floor::bezel), Floor::bezel / 2, (1920 - Floor::bezel/2), player_floor,sf::Keyboard::A, sf::Keyboard::D, sf::Keyboard::W);
+	int pwidth = numFloors*(1920 - Floor::bezel) / (2*numDoors);
+	int player_spawn_x = Floor::bezel / 2 + (rand()%pwidth) * ((1920 - Floor::bezel) / pwidth);
+	Player* player = new Player(player_spawn_x, player_spawn_y, pwidth - p_bez, fheight - Floor::height-p_bez, (1920.0f - Floor::bezel), Floor::bezel / 2, (1920 - Floor::bezel/2), player_floor,sf::Keyboard::A, sf::Keyboard::D, sf::Keyboard::W);
 	addEntity(player);
 }
 

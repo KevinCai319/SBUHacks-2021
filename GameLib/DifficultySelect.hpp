@@ -27,5 +27,6 @@ class DifficultySelect : public Layer
 		~DifficultySelect(); 
 		virtual int recieve(Layer& layer, int status)override;
 		virtual void notify(Layer& layer, int status)override;
+		int difficulty = 0;
 };
 

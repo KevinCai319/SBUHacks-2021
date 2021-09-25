@@ -4,6 +4,7 @@
 #include "MainMenu.hpp"
 #include "DifficultySelect.hpp"
 #include "Manual.hpp"
+#include "Game.hpp"
 
 SceneHandler::SceneHandler(int x, int y, const std::string& title,Layer* layer) :
 	WindowHandler(x,y,title,layer)
@@ -26,6 +27,13 @@ int SceneHandler::recieve(Layer& layer, int status)
 			switchScene(new Manual()); 
 			return 0;
 		case GAME:
+			switchScene(new Game(0));
+			return 0;
+		case GAME+1:
+			switchScene(new Game(1));
+			return 0;
+		case GAME+2:
+			switchScene(new Game(2));
 			return 0;
 		case DEFEAT:
 			return 0;

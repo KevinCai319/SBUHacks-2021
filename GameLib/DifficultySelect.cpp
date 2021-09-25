@@ -8,7 +8,7 @@ DifficultySelect::DifficultySelect() :
 	backButton(0, WIN_HEIGHT - BACK_HEIGHT, BACK_WIDTH, BACK_HEIGHT)
 {
 	tags.insert("Select"); 
-
+	difficulty = 0;
 	fontptr = new sf::Font(); 
 	if (!fontptr->loadFromFile("Assets\\youmurdererbb_reg.ttf"))
 	{
@@ -76,6 +76,18 @@ DifficultySelect::DifficultySelect() :
 	backButton.setClickFunction([this]() {
 		backButton.notify(*this, MENU);
 	}); 
+	easyButton.setClickFunction([this]() {
+		difficulty = 0;
+		easyButton.notify(*this, GAME);
+		});
+	normalButton.setClickFunction([this]() {
+		difficulty = 1;
+		normalButton.notify(*this, GAME+1);
+		});
+	deathButton.setClickFunction([this]() {
+		difficulty = 2;
+		deathButton.notify(*this, GAME+2);
+	});
 
 	addEntity(&easyButton); 
 	addEntity(&normalButton); 
