@@ -23,7 +23,8 @@ class Game:public TimedLayer{
 		//Default player speed.(125px/s)
 		const int defaultESpeed = 125;
 		//Labels for the player before they die.
-		sf::Text timeLabel;
+		sf::Font* fontptr; 
+		sf::Text timeLabel; 
 		sf::Clock gameTimer;
 		//Time left before game over.
 		float timeLimit = 60;
@@ -36,7 +37,9 @@ class Game:public TimedLayer{
 		//Create door based on bit arrays.
 		void createTeleporters();
 		void createDoors(); 
+		void updateTimer(); 
 		virtual int recieve(Layer& layer, int status) override;
 		virtual void notify(Layer& layer, int status) override;
+		virtual void render(sf::RenderTarget& target, sf::RenderStates states) const override; 
 };
 

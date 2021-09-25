@@ -1,7 +1,8 @@
 #include "Game.hpp"
+#include "Dimension.h"
 
 Game::Game(int difficulty) :
-	TimedLayer()
+	TimedLayer() 
 {
 	tags.insert("Game");
 	switch (difficulty) {
@@ -34,6 +35,14 @@ Game::Game(int difficulty) :
 	int pwidth = numFloors*(1920 - Floor::bezel) / (2*numDoors) -p_bez;
 	int player_spawn_x = Floor::bezel / 2 + (rand()%pwidth) * ((1920 - Floor::bezel) / pwidth);
 	Player* player = new Player(player_spawn_x, player_spawn_y, pwidth, pheight, (1920.0f - Floor::bezel), Floor::bezel / 2, (1920 - Floor::bezel/2), player_floor,sf::Keyboard::A, sf::Keyboard::D, sf::Keyboard::W);
+	fontptr = new sf::Font(); 
+	fontptr->loadFromFile("Assets\\youmurdererbb_reg.ttf"); 
+	timeLabel.setFont(*fontptr); 
+	timeLabel.setPosition(0, 0); 
+	timeLabel.setCharacterSize(BUTTON_SIZE); 
+	timeLabel.setFillColor(sf::Color::White); 
+	gameTimer.restart(); 
+	updateTimer(); 
 	addEntity(player);
 	createEntities();
 	createTeleporters();
@@ -45,6 +54,7 @@ int Game::main()
 	int res = TimedLayer::main();
 	//Game Over
 	if (gameTimer.getElapsedTime().asSeconds() > timeLimit)return 7;
+	updateTimer(); 
 	return res;
 }
 
@@ -127,6 +137,12 @@ void Game::createDoors()
 	}
 }
 
+void Game::updateTimer()
+{
+	float timeLeft = timeLimit - gameTimer.getElapsedTime().asSeconds(); 
+	timeLabel.setString(std::to_string((int) timeLeft)); 
+}
+
 int Game::recieve(Layer& layer, int status)
 {
 	switch (status) {
@@ -147,4 +163,9 @@ int Game::recieve(Layer& layer, int status)
 
 void Game::notify(Layer& layer, int status)
 {
+}
+
+void Game::render(sf::RenderTarget& target, sf::RenderStates states) const
+{
+	target.draw(timeLabel, states); 
 }
