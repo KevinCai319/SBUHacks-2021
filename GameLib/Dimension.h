@@ -9,4 +9,8 @@
 
 #define BUTTON_WIDTH 400
 #define BUTTON_HEIGHT 100
-#define NORMAL_SIZE 96
+#define BUTTON_SIZE 96
+
+#define BACK_WIDTH 100
+#define BACK_HEIGHT 100
+#define BACK_SIZE 72

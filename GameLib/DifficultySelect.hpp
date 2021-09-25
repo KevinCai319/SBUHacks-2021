@@ -14,11 +14,13 @@ class DifficultySelect : public Layer
 		Button easyButton; 
 		Button normalButton; 
 		Button deathButton; 
+		Button backButton; 
 
 		sf::Font* fontptr; 
 		sf::Text easyText; 
 		sf::Text normalText; 
 		sf::Text deathText; 
+		sf::Text backText; 
 
 	public: 
 		DifficultySelect(); 

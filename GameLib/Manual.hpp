@@ -15,10 +15,12 @@ class Manual : public Layer
 	private: 
 		Button headerBox;
 		Button manualBox; 
+		Button backButton; 
 
 		sf::Font* fontptr; 
 		sf::Text headerText; 
 		sf::Text manualText; 
+		sf::Text backText; 
 
 	public: 
 		Manual(); 

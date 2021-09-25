@@ -16,6 +16,9 @@ int SceneHandler::recieve(Layer& layer, int status)
 	switch (status) {
 		case 0:
 			return status;//Exit
+		case MENU: 
+			switchScene(new MainMenu()); 
+			return 0; 
 		case DIFFICULTY:
 			switchScene(new DifficultySelect()); 
 			return 0;

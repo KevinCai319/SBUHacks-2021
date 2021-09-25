@@ -25,19 +25,19 @@ MainMenu::MainMenu() :
 	playText.setFont(*fontptr); 
 	playText.setString("Play"); 
 	playText.setFillColor(sf::Color::White); 
-	playText.setCharacterSize(NORMAL_SIZE); 
+	playText.setCharacterSize(BUTTON_SIZE); 
 	playButton.setText(playText); 
 
 	manualText.setFont(*fontptr); 
 	manualText.setString("Manual"); 
 	manualText.setFillColor(sf::Color::White); 
-	manualText.setCharacterSize(NORMAL_SIZE); 
+	manualText.setCharacterSize(BUTTON_SIZE); 
 	manualButton.setText(manualText); 
 
 	exitText.setFont(*fontptr); 
 	exitText.setString("Exit"); 
 	exitText.setFillColor(sf::Color::White); 
-	exitText.setCharacterSize(NORMAL_SIZE); 
+	exitText.setCharacterSize(BUTTON_SIZE); 
 	exitButton.setText(exitText); 
 
 	playButton.setDefaultFunction([this]() {

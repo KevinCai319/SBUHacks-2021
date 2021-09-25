@@ -3,11 +3,12 @@
 #include "MainMenu.hpp"
 
 #define EXIT -1
-#define DIFFICULTY 1
-#define MANUAL 2
-#define GAME 3
-#define DEFEAT 4
-#define WIN 5
+#define MENU 1
+#define DIFFICULTY 2
+#define MANUAL 3
+#define GAME 4
+#define DEFEAT 5
+#define WIN 6
 
 class SceneHandler : public WindowHandler
 {
