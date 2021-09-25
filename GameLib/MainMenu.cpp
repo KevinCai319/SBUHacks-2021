@@ -40,6 +40,32 @@ MainMenu::MainMenu() :
 	exitText.setCharacterSize(96); 
 	exitButton.setText(exitText); 
 
+	playButton.setDefaultFunction([this]() {
+		playText.setFillColor(sf::Color::Black); 
+		playButton.setText(playText); 
+	});
+	instructionButton.setDefaultFunction([this]() {
+		instructionText.setFillColor(sf::Color::Black); 
+		instructionButton.setText(instructionText); 
+	});
+	exitButton.setDefaultFunction([this]() {
+		exitText.setFillColor(sf::Color::Black); 
+		exitButton.setText(exitText); 
+	});
+
+	playButton.setHoverFunction([this]() {
+		playText.setFillColor(sf::Color::Red); 
+		playButton.setText(playText); 
+	});
+	instructionButton.setHoverFunction([this]() {
+		instructionText.setFillColor(sf::Color::Red); 
+		instructionButton.setText(instructionText); 
+	});
+	exitButton.setHoverFunction([this]() {
+		exitText.setFillColor(sf::Color::Red); 
+		exitButton.setText(exitText); 
+	});
+
 	addEntity(&titleBox); 
 	addEntity(&playButton); 
 	addEntity(&instructionButton); 

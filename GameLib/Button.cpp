@@ -49,6 +49,11 @@ const sf::Text& Button::getText()
 	return *m_text; 
 }
 
+void Button::setDefaultFunction(std::function<void()> function)
+{
+	if (function) onDefault = function; 
+}
+
 void Button::setClickFunction(std::function<void()> function)
 {
 	if(function)onClick = function;
@@ -106,7 +111,6 @@ int Button::main()
 	status = 0;
 	if (checkHover()) 
 	{
-		m_hitbox->setOutlineColor(sf::Color::Red);
 		if(onHover != nullptr)onHover();
 		if (checkClick()) 
 		{
@@ -115,7 +119,7 @@ int Button::main()
 	} 
 	else 
 	{
-		m_hitbox->setOutlineColor(sf::Color::Green);
+		if (onDefault) onDefault(); 
 	}
 	return status;
 }
