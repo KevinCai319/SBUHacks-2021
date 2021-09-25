@@ -26,13 +26,13 @@ int SceneHandler::recieve(Layer& layer, int status)
 		case MANUAL:
 			switchScene(new Manual()); 
 			return 0;
-		case GAME:
+		case EASY:
 			switchScene(new Game(0));
 			return 0;
-		case GAME+1:
+		case NORMAL:
 			switchScene(new Game(1));
 			return 0;
-		case GAME+2:
+		case DEATH:
 			switchScene(new Game(2));
 			return 0;
 		case DEFEAT:

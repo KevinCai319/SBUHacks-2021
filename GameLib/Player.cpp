@@ -10,13 +10,15 @@ Player::Player(int sx, int sy, int width, int height, float velocity, int lbound
 	lbound(lbound),
 	rbound(rbound),
 	floor(floor),
-	Timed::Timed(),
+	// Timed::Timed(),
 	Physical::Physical()
 {
 	box = sf::RectangleShape(sf::Vector2f(width,height));
 	box.setPosition(sx, sy);
 	tags.insert("Player");
+	tags.insert("Timed"); 
 }
+
 int Player::main(float dt)
 {
 	if (sf::Keyboard::isKeyPressed(left)) {

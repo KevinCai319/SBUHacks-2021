@@ -1,7 +1,7 @@
 #pragma once
 #include "Physical.hpp"
 #include "Timed.hpp"
-class Player :public Physical,public Timed{
+class Player : public Physical, public Timed{
 	public:
 		Player(int sx,int sy, int width, int height, float velocity,int lbound, int rbound,int floor,sf::Keyboard::Key left, sf::Keyboard::Key right, sf::Keyboard::Key interact);
 		virtual int main(float dt) override;

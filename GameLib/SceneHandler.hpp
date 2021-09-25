@@ -6,9 +6,11 @@
 #define MENU 1
 #define DIFFICULTY 2
 #define MANUAL 3
-#define GAME 4
-#define DEFEAT 9
-#define WIN 10
+#define EASY 4
+#define NORMAL 5
+#define DEATH 6
+#define DEFEAT 7
+#define WIN 8
 
 class SceneHandler : public WindowHandler
 {

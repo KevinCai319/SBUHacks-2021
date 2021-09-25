@@ -3,8 +3,7 @@
 class Timed : public virtual Layer
 {
 	public: 
-		Timed(); 
+		// Timed(); 
 		virtual int main(float dt) = 0; 
-	protected:
 };
 

@@ -78,15 +78,15 @@ DifficultySelect::DifficultySelect() :
 	}); 
 	easyButton.setClickFunction([this]() {
 		difficulty = 0;
-		easyButton.notify(*this, GAME);
+		easyButton.notify(*this, EASY);
 		});
 	normalButton.setClickFunction([this]() {
 		difficulty = 1;
-		normalButton.notify(*this, GAME+1);
+		normalButton.notify(*this, NORMAL);
 		});
 	deathButton.setClickFunction([this]() {
 		difficulty = 2;
-		deathButton.notify(*this, GAME+2);
+		deathButton.notify(*this, DEATH);
 	});
 
 	addEntity(&easyButton); 
