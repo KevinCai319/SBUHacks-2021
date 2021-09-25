@@ -24,8 +24,10 @@ public:
 	int color;
 	int shape;
 	int id;
+	int lx;
+	int hx;
 	Button number;
 	sf::Text doorText;
-	sf::Shape* symbol;
+	const sf::Drawable* symbol;
 };
 

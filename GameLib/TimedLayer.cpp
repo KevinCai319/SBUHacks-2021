@@ -14,8 +14,16 @@ int TimedLayer::main()
 	if (res) return res;
 	std::set<Layer*> timed = Layer::getTag("Timed");
 	for (Layer* t : timed) {
-		res = dynamic_cast<Timed*>(t)->main(time); 
-		if (res) return res;
+		Timed* tim = dynamic_cast<Timed*>(t);
+		res = tim->main(time); 
+		if (res)
+		{
+			int out = recieve(*tim, res);
+			if (out)
+			{
+				return out;
+			}
+		}
 	}
 	//std::cout << time << std::endl;
 	return 0;

@@ -1,11 +1,13 @@
 #include "Door.hpp"
-
+#include "Line.hpp"
 Door::Door(float sx, float sy, float width, float height, int floor, int color, int shape, int number) :
 	box(sf::RectangleShape(sf::Vector2f(width, height))),
 	floor(floor),
 	color(color),
 	shape(shape),
 	id(number),
+	lx(sx),
+	hx(sx+width),
 	number(sx+width*.25,sy+height*.125,width,height)
 {
 	box.setPosition(sf::Vector2f(sx, sy));
@@ -15,20 +17,29 @@ Door::Door(float sx, float sy, float width, float height, int floor, int color, 
 	{
 		// something happened
 	}
-
+	renderPriority = -1;
+	
 	doorText.setFont(*fontptr);
 	doorText.setString(std::to_string(id));
 	doorText.setFillColor(sf::Color::Black);
 	doorText.setCharacterSize(height/4);
 	this->number.setText(doorText);
+	sf::RectangleShape* tmp = new sf::RectangleShape(sf::Vector2f(width *0.9f, height / 2.0f));
+	sf::CircleShape* tmp2 = new sf::CircleShape(width/8);
 	switch (shape) {
 		case 0:
+			symbol = new Line(sf::Vector2f(sx,sy+height/4),sf::Vector2f(sx+width,sy+height/4),5);
 			break;
 		case 1:
+			tmp->setPosition(sx + width * .05f, sy + height * .05f);
+			symbol = tmp;
 			break;
 		case 2:
+			tmp2->setPosition(sx + width / 4, sy + width / 4);
+			symbol = tmp2;
 			break;
 		case 3:
+			symbol = new Line(sf::Vector2f(sx+width/4, sy), sf::Vector2f(sx + width/4, sy + height), 5);
 			break;
 	}
 	switch (color) {
@@ -64,6 +75,7 @@ void Door::render(sf::RenderTarget& target, sf::RenderStates states) const
 {
 	target.draw(box, states); 
 	target.draw(number, states);
+	target.draw(*symbol, states);
 }
 
 int Door::recieve(Layer& layer, int status)

@@ -30,12 +30,11 @@ Game::Game(int difficulty) :
 	int p_bez = 12;
 	srand(std::time(NULL));
 	int player_floor = rand()%numFloors;
-	int pheight = fheight - Floor::height - p_bez;
+	int pheight = (fheight - (Floor::height - p_bez))*.67;
 	int player_spawn_y = 1080 - (fheight * (player_floor)) - Floor::height - pheight;
 	int pwidth = numFloors*(1920 - Floor::bezel) / (2*numDoors) -p_bez;
 	int player_spawn_x = Floor::bezel / 2 + (rand()%pwidth) * ((1920 - Floor::bezel) / pwidth);
-	Player* player = new Player(player_spawn_x, player_spawn_y, pwidth, pheight, (1920.0f - Floor::bezel), Floor::bezel / 2, (1920 - Floor::bezel/2), player_floor,sf::Keyboard::A, sf::Keyboard::D, sf::Keyboard::W);
-	fontptr = new sf::Font(); 
+  fontptr = new sf::Font(); 
 	fontptr->loadFromFile("Assets\\youmurdererbb_reg.ttf"); 
 	timeLabel.setFont(*fontptr); 
 	timeLabel.setPosition(0, 0); 
@@ -43,6 +42,7 @@ Game::Game(int difficulty) :
 	timeLabel.setFillColor(sf::Color::White); 
 	gameTimer.restart(); 
 	updateTimer(); 
+	Player* player = new Player(player_spawn_x, player_spawn_y, pwidth, pheight, (1920.0f - Floor::bezel), Floor::bezel / 2, (1920 - Floor::bezel/2), player_floor,sf::Keyboard::A, sf::Keyboard::D, sf::Keyboard::S, sf::Keyboard::W);
 	addEntity(player);
 	createEntities();
 	createTeleporters();
@@ -135,6 +135,7 @@ void Game::createDoors()
 			id++;
 		}
 	}
+
 }
 
 void Game::updateTimer()
@@ -150,10 +151,15 @@ int Game::recieve(Layer& layer, int status)
 			return -1;
 		case 0:
 			return 0;
-		case 1://Player wins
+		case 1://Player guesses correct door
 			return 10;
-		case 4://Players fails
-			return 7;
+		case 2://Player guesses incorrect door
+			doorsOpened++;
+			if (doorsOpened > 2) {//3 tries and ur out
+				return 7;
+			}else {
+				return 0;
+			}
 		case 3://Grab timer data.
 
 			break;

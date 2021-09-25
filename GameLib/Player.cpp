@@ -1,7 +1,7 @@
 #include "Player.hpp"
 #include "Teleporter.hpp"
 #include "Door.hpp"
-Player::Player(int sx, int sy, int width, int height, float velocity, int lbound, int rbound, int floor, sf::Keyboard::Key left, sf::Keyboard::Key right, sf::Keyboard::Key interact) :
+Player::Player(int sx, int sy, int width, int height, float velocity, int lbound, int rbound, int floor, sf::Keyboard::Key left, sf::Keyboard::Key right, sf::Keyboard::Key interact, sf::Keyboard::Key open) :
 	left(left),
 	right(right),
 	interact(interact),
@@ -11,10 +11,14 @@ Player::Player(int sx, int sy, int width, int height, float velocity, int lbound
 	lbound(lbound),
 	rbound(rbound),
 	floor(floor),
+	open(open),
 	Timed::Timed(),
 	Physical::Physical()
 {
 	box = sf::RectangleShape(sf::Vector2f(width,height));
+	box.setFillColor(sf::Color(255,255,255,55));
+	box.setOutlineThickness(2);
+	box.setOutlineColor(sf::Color::Red);
 	box.setPosition(sx, sy);
 	tags.insert("Player");
 }
@@ -46,16 +50,24 @@ int Player::main(float dt)
 				}
 			}
 		}
-		std::set<Layer*> doors = parent->getTag("Door");
-		for (Layer* i : doors)
-		{
-			Door* dr = dynamic_cast<Door*>(i); 
-			if (getFloor() == dr->getFloor() && getR() > dr->getStart().x && getL() < dr->getStart().x + dr->getSize().x)
-			{
-				if (dr->isGood) {
-					status = 1;
-				}else {
-					status = 2;
+	}
+	else {
+		if (sf::Keyboard::isKeyPressed(open)) {
+			if (odCounter <= 0.0f) {
+				std::set<Layer*> doors = parent->getTag("Door");
+				for (Layer* i : doors)
+				{
+					Door* dr = dynamic_cast<Door*>(i);
+					if (getFloor() == dr->getFloor() && getR() > dr->lx && getL() < dr->hx)
+					{
+						odCounter = tDebounce;
+						if (dr->isGood) {
+							status = 1;
+						}
+						else {
+							status = 2;
+						}
+					}
 				}
 			}
 		}
@@ -63,7 +75,10 @@ int Player::main(float dt)
 	if (tdCounter > 0.0f) {
 		tdCounter -= dt;
 	}
-	return 0;
+	if (odCounter > 0.0f) {
+		odCounter -= dt;
+	}
+	return status;
 }
 
 const sf::Shape& Player::getShape()
