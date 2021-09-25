@@ -3,7 +3,7 @@
 #include "Timed.hpp"
 class Player : public Physical, public Timed{
 	public:
-		Player(int sx,int sy, int width, int height, float velocity,int lbound, int rbound,int floor,sf::Keyboard::Key left, sf::Keyboard::Key right, sf::Keyboard::Key interact);
+		Player(int sx,int sy, int width, int height, float velocity,int lbound, int rbound,int floor,sf::Keyboard::Key left, sf::Keyboard::Key right, sf::Keyboard::Key interact, sf::Keyboard::Key open);
 		virtual int main(float dt) override;
 		virtual const sf::Shape& getShape() override;
 		int getFloor();
@@ -13,6 +13,7 @@ class Player : public Physical, public Timed{
 		//Time after teleport where you can't teleport back.
 		float tDebounce = 0.5f;
 		float tdCounter = 0.0f;
+		float odCounter = 0.0f;
 	protected:
 		virtual int recieve(Layer& layer, int status)override;
 		virtual void render(sf::RenderTarget& target, sf::RenderStates states)const override;
@@ -20,6 +21,7 @@ class Player : public Physical, public Timed{
 		sf::Keyboard::Key left;
 		sf::Keyboard::Key right;
 		sf::Keyboard::Key interact;
+		sf::Keyboard::Key open;
 		const int width;
 		const int height;
 		const int lbound;
