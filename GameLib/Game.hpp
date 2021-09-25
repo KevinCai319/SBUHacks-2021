@@ -35,6 +35,7 @@ class Game:public TimedLayer{
 		void findBitArrays();
 		//Create door based on bit arrays.
 		void createDoors();
+		void createTeleporters();
 		virtual int recieve(Layer& layer, int status) override;
 		virtual void notify(Layer& layer, int status) override;
 };

@@ -42,6 +42,21 @@ const sf::Shape& Player::getShape()
 	return box;
 }
 
+int Player::getFloor()
+{
+	return floor;
+}
+
+int Player::getL()
+{
+	return box.getGlobalBounds().left;
+}
+
+int Player::getR()
+{
+	return box.getGlobalBounds().left + box.getGlobalBounds().width;
+}
+
 int Player::recieve(Layer& layer, int status)
 {
 	return 0;

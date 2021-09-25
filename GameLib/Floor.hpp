@@ -5,9 +5,11 @@
 class Floor :public Physical
 {
 	public:
-		Floor(int floorNumber, int fheight);
+		Floor(int floorNumber, int fheight, int availSpots);
 		virtual const sf::Shape& getShape() override;
+		Teleporter* placeT(int W);
 		int floorNumber;
+		std::vector<int> spots;
 		static const int bezel = 600;
 		static const int width = 1920 - bezel;
 		static const int height = 50;

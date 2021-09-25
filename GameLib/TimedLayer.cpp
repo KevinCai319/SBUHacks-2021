@@ -17,7 +17,7 @@ int TimedLayer::main()
 		res = dynamic_cast<Timed*>(t)->main(time); 
 		if (res) return res;
 	}
-	std::cout << time << std::endl;
+	//std::cout << time << std::endl;
 	return 0;
 }
 
