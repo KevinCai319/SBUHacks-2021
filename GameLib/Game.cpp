@@ -2,7 +2,7 @@
 #include "Dimension.h"
 
 Game::Game(int difficulty) :
-	TimedLayer() 
+	TimedLayer()
 {
 	tags.insert("Game");
 	switch (difficulty) {
@@ -34,7 +34,7 @@ Game::Game(int difficulty) :
 	int player_spawn_y = 1080 - (fheight * (player_floor)) - Floor::height - pheight;
 	int pwidth = numFloors*(1920 - Floor::bezel) / (2*numDoors) -p_bez;
 	int player_spawn_x = Floor::bezel / 2 + (rand()%pwidth) * ((1920 - Floor::bezel) / pwidth);
-  fontptr = new sf::Font(); 
+    fontptr = new sf::Font(); 
 	fontptr->loadFromFile("Assets\\youmurdererbb_reg.ttf"); 
 	timeLabel.setFont(*fontptr); 
 	timeLabel.setPosition(0, 0); 
@@ -117,6 +117,25 @@ void Game::createTeleporters()
 	
 }
 
+void Game::createClues(const Door* door)
+{
+	const std::string COLORS[] = {"Yellow", "Red", "Green", "Blue", "Magenta", "Cyan"};
+	const std::string SHAPES[] = {"H Line", "Square", "Circle", "V Line"};
+
+	if (door->id % 2 == 0)
+		clues.push_back("Door is even");
+	else
+		clues.push_back("Door is odd");
+
+	if (door->floor % 2 == 0)
+		clues.push_back("Door is on even floor");
+	else
+		clues.push_back("Door is on odd floor"); 
+
+	clues.push_back("Door is " + COLORS[door->color]); 
+	clues.push_back("Door is " + SHAPES[door->shape]);
+}
+
 void Game::createDoors()
 {
 	int doorsOnFloor = numDoors / numFloors;
@@ -124,13 +143,18 @@ void Game::createDoors()
 	float dwidth = spcW * 0.8;
 	float dheight = (fheight-Floor::height) * 0.75;
 	int id = 1;
+	int safe = rand() % numDoors + 1; 
 	for (int f = 0; f < numFloors; ++f)
 	{
 		float sy = 1080-f*fheight-Floor::height - dheight;  
 		float left = Floor::bezel / 2 + spcW * 0.1;
 		for (int d = 0; d < doorsOnFloor; ++d)
 		{
-			addEntity(new Door(left, sy, dwidth, dheight, f,rand()%6,rand()%4,id)); 
+			Door* door = new Door(left, sy, dwidth, dheight, f, rand() % 6, rand() % 4, id); 
+			door->isGood = id == safe; 
+			if (id == safe)
+				createClues(door); 
+			addEntity(door); 
 			left += spcW*2;
 			id++;
 		}
